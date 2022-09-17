@@ -13,13 +13,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class DrivableTrader<T> extends Trader<T>{
-
-
-    public DrivableTrader(List<T> inventory , List<T> wishlist, int money){
-        super(inventory, wishlist, money);
-
-    }
+public class DrivableTrader extends Trader<Drivable>{
 
 //    public ArrayList<T> strict_inventory(List<T> inventory){
 //        ArrayList<T> strict_inventory = new ArrayList<T>();
@@ -32,21 +26,18 @@ public class DrivableTrader<T> extends Trader<T>{
 //        return strict_inventory;
 //    }
 
+    public DrivableTrader(List<Drivable> inventory, List<Drivable> wishlist,int money){
+        super(inventory, wishlist, money);
+    }
+
     public DrivableTrader(int money){
         super(money);
     }
 
     @Override
-    public void addToWishlist(T item){
-        if (item instanceof Drivable){
-            super.addToWishlist(item);
-        }
-    }
-
-    @Override
-    public int getSellingPrice(T item) {
+    public int getSellingPrice(Drivable item) {
         if (item instanceof Tradable){
-            return ((Tradable) item).getPrice() + ((Drivable) item).getMaxSpeed();
+            return ((Tradable) item).getPrice() + item.getMaxSpeed();
         }else{
             return Tradable.MISSING_PRICE;
         }
